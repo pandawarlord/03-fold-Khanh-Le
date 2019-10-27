@@ -1,6 +1,8 @@
 # Assignment 3: All about Fold (160 points)
 
-## Due by Wednesday 5/15, 23:59:59
+## Due by Wednesday 11/6, 23:59:59
+
+Get the assignment from [this link](https://classroom.github.com/a/Hvb2Bc3_). *DO NOT CLONE* this repository directly!
 
 ## Overview
 
@@ -28,7 +30,9 @@ with suitable Haskell implementations.
 
 ## Assignment Testing and Evaluation
 
+<!--
 Your functions/programs **must** compile and run on `ieng6.ucsd.edu`.
+-->
 
 Most of the points, will be awarded automatically, by
 **evaluating your functions against a given test suite**.
@@ -72,6 +76,8 @@ To submit your code, just do:
 ```bash
 $ make turnin
 ```
+
+or alternatively, just `git push` you code to your github classroom repository.
 
 ## Problem 1: Warm-Up
 
