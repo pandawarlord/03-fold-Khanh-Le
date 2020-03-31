@@ -1,9 +1,5 @@
 # Assignment 3: All about Fold (160 points)
 
-## Due by Wednesday 11/6, 23:59:59
-
-Get the assignment from [this link](https://classroom.github.com/a/dyKI7bkd). *DO NOT CLONE* this repository directly!
-
 ## Overview
 
 The overall objective of this assignment is to expose you

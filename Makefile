@@ -1,10 +1,7 @@
 
 #####################################################################################################
-COURSE=cs130sp19
-ASGN=03
-NAME=fold
 STACK=stack --allow-different-user
-BUILD_OPTS=--ghc-options -O0 
+BUILD_OPTS=
 #####################################################################################################
 
 test: clean
@@ -27,7 +24,7 @@ turnin:
 	git push origin master
 
 upstream:
-	git remote add upstream https://github.com/ucsd-cse130/02-random-art.git
+	git remote add upstream https://github.com/cse130-assignments/02-random-art.git
 
 update:
 	git pull upstream master
