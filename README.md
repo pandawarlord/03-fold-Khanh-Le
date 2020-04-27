@@ -20,7 +20,31 @@ You should only need to modify the parts of the files which say:
 error "TBD: ..."
 ```
 
-with suitable Haskell implementations.
+with suitable Haskell implementations. Do not change the skeleton code,
+like `... = foldLeft f base xs`, since the purpose is to get you used to
+writing folds.
+
+Exception: you may rename variables that we provide, which includes changing
+their patterns. For example, if we give you `(_, res) = ...`, feel free to
+change it to `(_, result) = ...` or `result = ...`. Feel free to add guards,
+too.
+
+You may also define helper variables in the where clause.
+
+You are allowed to use any library function on integers,
+but only the following library functions on lists: 
+
+     length
+     append (++)
+     map
+     foldl'
+     foldr
+     unzip
+     zip
+     reverse
+
+If you know the functions `.` (compose) and `$` (apply), feel free to use them,
+though they are not by any means necessary to complete this assignment.
 
 **Note:** Start early, to avoid any unexpected shocks late in the day.
 
@@ -74,6 +98,28 @@ $ make turnin
 ```
 
 or alternatively, just `git push` you code to your github classroom repository.
+
+## Recommended Workflow
+
+Learning folds comes with lots of type errors. You can make certain type errors
+less nasty by annotating variables with their types. For example, in the
+expression:
+
+```haskell
+f (g x) y
+```
+
+you can annotate any of the variables to prevent the compiler from assigning
+them strange types.
+
+```haskell
+f (g x) (y :: Int)
+f ((g :: [Int] -> Int) x) y
+```
+
+Additionally, to test the functions that you'll be writing, we recommend you
+run `make ghci`. This brings up a prompt that automatically imports your functions.
+Use this prompt to check any of the examples below.
 
 ## Problem 1: Warm-Up
 
@@ -138,6 +184,8 @@ ghci> pipe [(\x -> x * 4), (\x -> x + x)] 3
 24
 ```
 
+**Hint**: if `pipe` throws the error `Couldn't match type a with a -> a`,
+make sure your `f` is returning a function!
 
 ### (c) 20 points
 
@@ -202,7 +250,7 @@ You should get the following behavior:
 ghci> stringOfList show [1, 2, 3, 4, 5, 6]
 "[1, 2, 3, 4, 5, 6]"
 
-ghci> stringOfList (fun x -> x) ["foo"]
+ghci> stringOfList (\x -> x) ["foo"]
 "[foo]"
 
 ghci> stringOfList (stringOfList show) [[1, 2, 3], [4, 5], [6], []]
@@ -222,7 +270,7 @@ ghci> let x = 99999999999999999999999999999999999999999999999 :: Int
 ```
 
 You will now implement functions to manipulate arbitrarily large
-numbers represented as `[Int]`, i.e. lists of `Int`.
+(nonnegative, base-10) numbers represented as `[Int]`, i.e. lists of `Int`.
 
 ### (a) 10 + 5 + 10 points
 
@@ -233,6 +281,8 @@ clone :: a -> Int -> [a]
 ```
 
 such that `clone x n` returns a list of `n` copies of the value `x`.
+You may use recursion in the implementation of `clone` (though it is
+not necessary).
 If the integer `n` is `0` or negative, then `clone` should return
 the empty list. You should get the following behavior:
 
@@ -286,6 +336,9 @@ ghci> removeZero [0, 0, 0, 0]
 []
 ```
 
+**Note**: you may implement `removeZero` with recursion
+(although it is certainly possible with a fold!)
+
 ### (b) 25 points
 
 Let us use the list `[d1, d2, ..., dn]`, where each `di`
@@ -316,6 +369,11 @@ ghci> bigAdd [9, 9] [1, 0, 0, 2]
 ghci> bigAdd [9, 9, 9, 9] [9, 9, 9]
 [1, 0, 9, 9, 8]
 ```
+You may find the integer functions `div` and `mod` to be helpful here.
+
+**Note about `BigInt`s**: we expect the result of `bigAdd` to not have any
+leading zeroes, like `[0, 1, 0, 9, 9, 8]`. A caveat to this: zero should be
+represented as `[]`.
 
 ### (c) 15 + 20 points
 
@@ -350,4 +408,10 @@ ghci> bigMul [9,9,9,9] [9,9,9,9]
 
 ghci> bigMul [9,9,9,9,9] [9,9,9,9,9]
 [9,9,9,9,8,0,0,0,0,1]
+
+ghci> bigMul [4,3,7,2] [1,6,3,2,9]
+[7,1,3,9,0,3,8,8]
+
+ghci> bigMul [9,9,9,9] [0]
+[]
 ```
