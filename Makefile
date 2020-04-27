@@ -1,20 +1,17 @@
-
-#####################################################################################################
-STACK=stack --allow-different-user
-BUILD_OPTS=
-#####################################################################################################
-
-test: clean
-	$(STACK) test $(BUILD_OPTS)
+test:
+	stack test
 
 bin:
-	$(STACK) build $(BUILD_OPTS)
+	stack build
 
 clean: 
-	$(STACK) clean
+	stack clean
 
 distclean: clean 
 	rm -rf .stack-work 
+
+watch:
+	stack build --file-watch
 
 tags:
 	hasktags -x -c lib/
@@ -30,4 +27,6 @@ update:
 	git pull upstream master
 
 ghci:
-	$(STACK) exec -- ghci
+	stack ghci
+
+.PHONY: test bin clean distclean watch tags turnin upstream update ghci
