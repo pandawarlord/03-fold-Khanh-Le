@@ -94,7 +94,7 @@ A simple way to create this zip file is:
 - Run `git push` to push your local changes to your private fork of the assignment repository
 - Navigate to your private fork on github and download source code as a zip
 
-Please *do not* include the `.stack-work` folder into the submission.
+Please *do not* include the `.stack-work` or `__MACOSX` folders into the submission.
 
 **Note:** Upon submission, Gradescope will only test your code on the *small public test suite*,
 so it will show maximum 24/160 points.

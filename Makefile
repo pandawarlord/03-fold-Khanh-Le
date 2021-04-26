@@ -1,20 +1,23 @@
-test:
-	stack test
+
+#####################################################################################################
+STACK=stack --allow-different-user
+BUILD_OPTS=
+#####################################################################################################
+
+test: clean
+	$(STACK) test $(BUILD_OPTS)
 
 bin:
-	stack build
+	$(STACK) build $(BUILD_OPTS)
 
 clean: 
-	stack clean
+	$(STACK) clean
 
 distclean: clean 
 	rm -rf .stack-work 
 
-watch:
-	stack build --file-watch
-
 tags:
-	hasktags -x -c lib/
+	hasktags -x -c src/
 
 turnin:
 	git commit -a -m "turnin"
@@ -22,11 +25,9 @@ turnin:
 
 upstream:
 	git remote add upstream https://github.com/cse130-assignments/03-fold.git
-
+  
 update:
 	git pull upstream master
 
 ghci:
-	stack ghci
-
-.PHONY: test bin clean distclean watch tags turnin upstream update ghci
+	$(STACK) ghci
