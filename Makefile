@@ -24,7 +24,7 @@ turnin:
 	git push origin master
 
 upstream:
-	git remote add upstream https://github.com/cse130-assignments/03-fold.git
+	git remote add upstream https://github.com/cse130-assignments/03-fold.git --allow-unrelated-histories
   
 update:
 	git pull upstream master
