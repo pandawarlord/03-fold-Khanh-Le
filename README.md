@@ -91,11 +91,6 @@ Submit your code via the HW-3 assignment on Gradescope. Connect your Github acco
 
 Detailed instructions on how to submit your code directly from the Git repo can be found on Piazza.
 
-**Note:** Upon submission, Gradescope will only test your code on the *small public test suite*,
-so it will show maximum 24/160 points.
-After the deadline, we will regrade your submission on the full private test suite
-and you will get your full points.
-
 ## Recommended Workflow
 
 Learning folds comes with lots of type errors. You can make certain type errors
