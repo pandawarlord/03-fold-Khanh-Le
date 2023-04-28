@@ -1,4 +1,4 @@
-# Assignment 3: All about Fold (160 points)
+# Assignment 3: All about Fold (Points: 24 public / 160 private)
 
 ## Overview
 
@@ -87,14 +87,9 @@ but you will not be graded on this.
 
 ## Submission Instructions
 
-Submit your code via the HW-3 assignment on Gradescope.
-You must submit a single zip file containing a single directory with your repository inside.
-A simple way to create this zip file is:
+Submit your code via the HW-3 assignment on Gradescope. Connect your Github account to Gradescope and select your repo. If you're in a group, don't forget to add your partner to the submission!
 
-- Run `git push` to push your local changes to your private fork of the assignment repository
-- Navigate to your private fork on github and download source code as a zip
-
-Please *do not* include the `.stack-work` or `__MACOSX` folders into the submission.
+Detailed instructions on how to submit your code directly from the Git repo can be found on Piazza.
 
 **Note:** Upon submission, Gradescope will only test your code on the *small public test suite*,
 so it will show maximum 24/160 points.
