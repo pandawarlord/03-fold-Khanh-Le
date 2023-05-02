@@ -118,7 +118,7 @@ Use this prompt to check any of the examples below.
 ### (a) 15 points
 
 Fill in the skeleton given for `sqsum`,
-which uses `foldl'` to get a function
+which uses `foldLeft` to get a function
 
 ```haskell
 sqSum :: [Int] -> Int
@@ -147,7 +147,7 @@ ghci> sqSum [(-1), (-2), (-3), (-4)]
 
 ### (b) 30 points
 
-Fill in the skeleton given for `pipe` which uses `foldl'`
+Fill in the skeleton given for `pipe` which uses `foldLeft`
 to get a function
 
 ```haskell
@@ -182,7 +182,7 @@ make sure your `f` is returning a function!
 ### (c) 20 points
 
 Fill in the skeleton given for `sepConcat`,
-which uses `foldl'` to get a function
+which uses `foldLeft` to get a function
 
 ```haskell
 sepConcat :: String -> [String] -> String
@@ -251,8 +251,7 @@ ghci> stringOfList (stringOfList show) [[1, 2, 3], [4, 5], [6], []]
 
 ## Problem 2: Big Numbers
 
-The Haskell type `Int` only contains values up to a certain size (for reasons
-that will become clear as we implement our own compiler). For example,
+The Haskell type `Int` only contains values up to a certain size. For example,
 
 ```haskell
 ghci> let x = 99999999999999999999999999999999999999999999999 :: Int
@@ -273,8 +272,7 @@ clone :: a -> Int -> [a]
 ```
 
 such that `clone x n` returns a list of `n` copies of the value `x`.
-You may use recursion in the implementation of `clone` (though it is
-not necessary).
+You may use recursion in the implementation of `clone`.
 If the integer `n` is `0` or negative, then `clone` should return
 the empty list. You should get the following behavior:
 
@@ -363,8 +361,10 @@ ghci> bigAdd [9, 9, 9, 9] [9, 9, 9]
 ```
 You may find the integer functions `div` and `mod` to be helpful here.
 
+Your implementation should **not** be recursive.
+
 **Note about `BigInt`s**: we expect the result of `bigAdd` to not have any
-leading zeroes, like `[0, 1, 0, 9, 9, 8]`. A caveat to this: zero should be
+leading zeroes, like `[0, 1, 0, 9, 9, 8]`. The number zero should be
 represented as `[]`.
 
 ### (c) 15 + 20 points
@@ -384,6 +384,8 @@ integer with the digit. You should get the following behavior:
 ghci> mulByDigit 9 [9,9,9,9]
 [8,9,9,9,1]
 ```
+
+Your implementation should **not** be recursive.
 
 Now, using `mulByDigit`, fill in the implementation of
 
@@ -407,3 +409,5 @@ ghci> bigMul [4,3,7,2] [1,6,3,2,9]
 ghci> bigMul [9,9,9,9] [0]
 []
 ```
+
+Your implementation should **not** be recursive.
