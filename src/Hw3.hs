@@ -42,8 +42,8 @@ foldLeft = foldl'
 sqSum :: [Int] -> Int
 sqSum xs = foldLeft f base xs
   where
-   f a x = error "TBD: sqSum f"
-   base  = error "TBD: sqSum base"
+   f a x = a + (x*x)
+   base  = 0
 
 --------------------------------------------------------------------------------
 -- | `pipe [f1,...,fn] x` should return `f1(f2(...(fn x)))`
@@ -60,8 +60,8 @@ sqSum xs = foldLeft f base xs
 pipe :: [(a -> a)] -> (a -> a)
 pipe fs   = foldLeft f base fs
   where
-    f a x = error "TBD: pipe: f"
-    base  = error "TBD: pipe: base"
+    f a x = a.x
+    base  = id
 
 --------------------------------------------------------------------------------
 -- | `sepConcat sep [s1,...,sn]` returns `s1 ++ sep ++ s2 ++ ... ++ sep ++ sn`
@@ -79,9 +79,9 @@ sepConcat :: String -> [String] -> String
 sepConcat sep []     = ""
 sepConcat sep (x:xs) = foldLeft f base l
   where
-    f a x            = error "TBD:sepConcat:f"
-    base             = error "TBD:sepConcat:base"
-    l                = error "TBD:l"
+    f a x            = a ++ sep ++ x
+    base             = "" ++ x
+    l                = xs
 
 intString :: Int -> String
 intString = show
@@ -100,7 +100,8 @@ intString = show
 -- "[[1, 2, 3], [4, 5], [6], []]"
 
 stringOfList :: (a -> String) -> [a] -> String
-stringOfList f xs = error "TBD:stringOfList"
+stringOfList f xs = "[" ++ ele ++ "]"
+  where ele = sepConcat ", " (map f xs)
 
 --------------------------------------------------------------------------------
 -- | `clone x n` returns a `[x,x,...,x]` containing `n` copies of `x`
@@ -112,7 +113,8 @@ stringOfList f xs = error "TBD:stringOfList"
 -- ["foo", "foo"]
 
 clone :: a -> Int -> [a]
-clone x n = error "TBD:clone"
+clone _ 0 = []
+clone x n = x : clone x (n - 1)
 
 type BigInt = [Int]
 
@@ -128,7 +130,15 @@ type BigInt = [Int]
 -- [1,0,0,2] [0,0,9,9]
 
 padZero :: BigInt -> BigInt -> (BigInt, BigInt)
-padZero l1 l2 = error "TBD:padZero"
+padZero l1 l2 
+  | lenl1 == lenl2 = (l1,l2)
+  | lenl1 < lenl2 = ((clone 0 diff) ++ l1,  l2)
+  | lenl1 > lenl2 = (l1, (clone 0 diff) ++ l2)
+
+    where
+      lenl1 = length l1
+      lenl2 = length l2
+      diff = abs (lenl1 - lenl2)
 
 --------------------------------------------------------------------------------
 -- | `removeZero ds` strips out all leading `0` from the left-side of `ds`.
@@ -143,7 +153,13 @@ padZero l1 l2 = error "TBD:padZero"
 -- []
 
 removeZero :: BigInt -> BigInt
-removeZero ds = error "TBD:removeZero"
+removeZero ds 
+  | ds == [] = []
+  | x /= 0  =  x:xs
+  | otherwise = removeZero xs
+    where (x:xs) = ds
+
+
 
 
 --------------------------------------------------------------------------------
@@ -160,9 +176,10 @@ bigAdd l1 l2     = removeZero res
   where
     (l1', l2')   = padZero l1 l2
     res          = foldLeft f base args
-    f a x        = error "TBD:bigAdd:f"
-    base         = error "TBD:bigAdd:base"
-    args         = error "TBD:bigAdd:args"
+    f a x        = case (a,x) of
+            ((l1:r1),(l2,r2)) -> ((l1+l2+r2) `div` 10) : ((l1+l2+r2) `mod` 10) : r1
+    base         = [0]
+    args         = reverse(zip l1' l2')
 
 
 --------------------------------------------------------------------------------
@@ -173,7 +190,7 @@ bigAdd l1 l2     = removeZero res
 -- [8,9,9,9,1]
 
 mulByDigit :: Int -> BigInt -> BigInt
-mulByDigit i n = error "TBD:mulByDigit"
+mulByDigit i n = foldLeft bigAdd [0] (clone n i)
 
 --------------------------------------------------------------------------------
 -- | `bigMul n1 n2` returns the `BigInt` representing the product of `n1` and `n2`.
@@ -188,6 +205,6 @@ bigMul :: BigInt -> BigInt -> BigInt
 bigMul l1 l2 = res
   where
     res      = foldLeft f base args
-    f a x    = error "TBD:bigMul:f"
+    f a x    = error "TBD:bigMul:"
     base     = error "TBD:bigMul:base"
     args     = error "TBD:bigMul:args"
